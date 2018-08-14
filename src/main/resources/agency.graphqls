@@ -1,0 +1,20 @@
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+extend type Query {
+    allAgencies: [Agency]
+    agency(id: Long!): Agency
+}
+
+type Agency {
+    id: ID!
+    name: String!
+    rating: Float
+}
+
+extend type Mutation {
+    addAgency(name: String!, rating: Float) : Agency!
+    updateAgencyRating(id: ID!, rating: Float!) : Agency!
+}
