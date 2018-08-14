@@ -1,4 +1,4 @@
-package com.tours.packages.springbootgraphql;
+package com.github.ravisankarchinnam.tours;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

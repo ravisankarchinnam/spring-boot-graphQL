@@ -1,13 +1,13 @@
-package com.tours.packages.resolver;
+package com.github.ravisankarchinnam.tours.graphql.schema;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
-import com.tours.packages.exception.AgencyNotFoundException;
-import com.tours.packages.exception.TourNotFoundException;
-import com.tours.packages.model.Agency;
-import com.tours.packages.model.Tour;
-import com.tours.packages.repository.AgencyRepository;
-import com.tours.packages.repository.TourRepository;
-import com.tours.packages.enums.TourType;
+import com.github.ravisankarchinnam.tours.exception.AgencyNotFoundException;
+import com.github.ravisankarchinnam.tours.exception.TourNotFoundException;
+import com.github.ravisankarchinnam.tours.model.Agency;
+import com.github.ravisankarchinnam.tours.model.Tour;
+import com.github.ravisankarchinnam.tours.repository.AgencyRepository;
+import com.github.ravisankarchinnam.tours.repository.TourRepository;
+import com.github.ravisankarchinnam.tours.enums.TourType;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

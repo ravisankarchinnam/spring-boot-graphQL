@@ -1,4 +1,4 @@
-package com.tours.packages.model;
+package com.github.ravisankarchinnam.tours.model;
 
 import lombok.*;
 

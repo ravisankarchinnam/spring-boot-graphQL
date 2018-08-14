@@ -1,4 +1,4 @@
-package com.tours.packages.exception;
+package com.github.ravisankarchinnam.tours.exception;
 
 import graphql.ErrorType;
 import graphql.GraphQLError;

@@ -1,6 +1,6 @@
-package com.tours.packages.model;
+package com.github.ravisankarchinnam.tours.model;
 
-import com.tours.packages.enums.TourType;
+import com.github.ravisankarchinnam.tours.enums.TourType;
 import lombok.*;
 
 import javax.persistence.*;

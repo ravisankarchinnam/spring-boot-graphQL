@@ -1,11 +1,11 @@
-package com.tours.packages;
+package com.github.ravisankarchinnam.tours;
 
-import com.tours.packages.enums.TourType;
-import com.tours.packages.exception.GraphQLErrorAdapter;
-import com.tours.packages.model.Agency;
-import com.tours.packages.model.Tour;
-import com.tours.packages.repository.AgencyRepository;
-import com.tours.packages.repository.TourRepository;
+import com.github.ravisankarchinnam.tours.enums.TourType;
+import com.github.ravisankarchinnam.tours.exception.GraphQLErrorAdapter;
+import com.github.ravisankarchinnam.tours.model.Agency;
+import com.github.ravisankarchinnam.tours.model.Tour;
+import com.github.ravisankarchinnam.tours.repository.AgencyRepository;
+import com.github.ravisankarchinnam.tours.repository.TourRepository;
 import graphql.ExceptionWhileDataFetching;
 import graphql.GraphQLError;
 import graphql.servlet.GraphQLErrorHandler;

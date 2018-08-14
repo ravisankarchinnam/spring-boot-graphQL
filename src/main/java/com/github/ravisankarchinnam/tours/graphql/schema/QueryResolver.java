@@ -1,12 +1,12 @@
-package com.tours.packages.resolver;
+package com.github.ravisankarchinnam.tours.graphql.schema;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
-import com.tours.packages.exception.AgencyNotFoundException;
-import com.tours.packages.exception.TourNotFoundException;
-import com.tours.packages.model.Agency;
-import com.tours.packages.model.Tour;
-import com.tours.packages.repository.AgencyRepository;
-import com.tours.packages.repository.TourRepository;
+import com.github.ravisankarchinnam.tours.exception.AgencyNotFoundException;
+import com.github.ravisankarchinnam.tours.exception.TourNotFoundException;
+import com.github.ravisankarchinnam.tours.model.Agency;
+import com.github.ravisankarchinnam.tours.model.Tour;
+import com.github.ravisankarchinnam.tours.repository.AgencyRepository;
+import com.github.ravisankarchinnam.tours.repository.TourRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
