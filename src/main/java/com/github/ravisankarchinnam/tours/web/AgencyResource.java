@@ -1,6 +1,7 @@
 package com.github.ravisankarchinnam.tours.web;
 
 
+import com.github.ravisankarchinnam.tours.graphql.schema.MutationResolver;
 import com.github.ravisankarchinnam.tours.graphql.schema.QueryResolver;
 import com.github.ravisankarchinnam.tours.model.Agency;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import java.util.List;
 public class AgencyResource {
     @Autowired
     private QueryResolver query;
+    @Autowired
+    private MutationResolver mutation;
 
 
 
@@ -30,4 +33,11 @@ public class AgencyResource {
         return query.getAgency(id);
     }
 
+
+
+    @PostMapping
+    @ResponseBody
+    public void createAgency(String name, Double rating) {
+        mutation.addAgency(name, rating);
+    }
 }

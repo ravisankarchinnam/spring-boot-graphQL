@@ -16,7 +16,9 @@ This Standalone Spring boot project demonstrates the crud operations on Tour ser
 ## 3. Once the application is started you can access http://localhost:8080/graphiql
     ![GraphiQL](screen-shots/graphiql.PNG)
 
-## Testing the Application using below Syntax:
+## Testing the Application:
+
+## GraphQL
 
 ### To retrieve AllTours:
     ```
@@ -49,7 +51,7 @@ This Standalone Spring boot project demonstrates the crud operations on Tour ser
     
     JSON/postman syntax:
         {
-            "mutation":"{createTour(name:"India", price:"3454334.00",duration:"10", type:LUXURY,agency:1){name}}"
+        	"query": "mutation createTour {createTour(name:'India', price:'34543.43',duration:'3', type:LUXURY,agency:1){name}}","variables":null,"operationName":"createTour"
         }
     ```
 ### To retrieve a single Tour:
@@ -81,7 +83,7 @@ This Standalone Spring boot project demonstrates the crud operations on Tour ser
     
     JSON/postman syntax:
         {
-            "mutation":"{deleteTour(id:2)}"
+            "query": "mutation deleteTour {deleteTour(id:4)}","variables":null,"operationName":"deleteTour"
         }
     ```    
 ## To retrieve allAgencies:
@@ -125,6 +127,10 @@ This Standalone Spring boot project demonstrates the crud operations on Tour ser
     
     JSON/postman syntax:
         {
-            "mutation":"{updateAgencyRating(id:1, rating:5){name rating}}"
+        	"query":"mutation updateAgencyRating {updateAgencyRating(id:1, rating:2){name rating}}", "operationName": "updateAgencyRating"
         }
     ```
+## REST:
+
+    Swagger UI is configured in this application to provide rest endpoints. So if you want to test the services using REST URL's,
+    you can visit http://localhost:8080/swagger-ui.html

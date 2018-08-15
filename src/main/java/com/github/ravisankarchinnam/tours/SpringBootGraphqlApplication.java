@@ -13,13 +13,22 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.Contact;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @SpringBootApplication
+@EnableSwagger2
 public class SpringBootGraphqlApplication {
 
     public static void main(String[] args) {
@@ -72,6 +81,24 @@ public class SpringBootGraphqlApplication {
                             "Nidelva is a river in Trøndelag county, Norway. The 30-kilometre long river travels through the municipalities of Trondheim and Klæbu.", TourType.ADVENTURE, lAgency))
                     .forEach(tourRepository::save);
         };
+    }
+
+    @Bean
+    public Docket docket() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .select()
+                .apis(RequestHandlerSelectors.any())
+                .paths(PathSelectors.any())
+                .build()
+                .apiInfo(generateApiInfo());
+    }
+
+
+
+    private ApiInfo generateApiInfo() {
+        return new ApiInfo(
+                "Book Rest Service", "This service is to perform CRUD operations.", "Version 1.0 - mw",
+                "urn:tos", new Contact("Ravisankar Chinnam", "https://github.com/ravisankarchinnam", "ravisankarchinnam@gmail.com"), "Apache 2.0", "http://www.apache.org/licenses/LICENSE-2.0", Collections.emptyList());
     }
 
 }
