@@ -134,3 +134,6 @@ This Standalone Spring boot project demonstrates the crud operations on Tour ser
 
     Swagger UI is configured in this application to provide rest endpoints. So if you want to test the services using REST URL's,
     you can visit http://localhost:8080/swagger-ui.html
+    
+    Tour: http://localhost:8080/api/rest/tour/
+    Agency: http://localhost:8080/api/rest/agency/

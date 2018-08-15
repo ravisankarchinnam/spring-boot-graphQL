@@ -97,7 +97,7 @@ public class SpringBootGraphqlApplication {
 
     private ApiInfo generateApiInfo() {
         return new ApiInfo(
-                "Book Rest Service", "This service is to perform CRUD operations.", "Version 1.0 - mw",
+                "Tour Rest Service", "This service is to perform CRUD operations.", "Version 1.0 - mw",
                 "urn:tos", new Contact("Ravisankar Chinnam", "https://github.com/ravisankarchinnam", "ravisankarchinnam@gmail.com"), "Apache 2.0", "http://www.apache.org/licenses/LICENSE-2.0", Collections.emptyList());
     }
 
