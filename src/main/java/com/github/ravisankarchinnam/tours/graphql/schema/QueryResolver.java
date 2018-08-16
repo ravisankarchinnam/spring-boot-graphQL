@@ -32,11 +32,8 @@ public class QueryResolver implements GraphQLQueryResolver {
 
     //tour(id: Long!): Tour
     public Tour getTour(Long id) {
-        Tour tour = tourRepository.findOne(id);
-        if (tour == null) {
-            throw new TourNotFoundException(id);
-        }
-        return tour;
+        return tourRepository.findById(id)
+                .orElseThrow(() -> new TourNotFoundException(id));
     }
 
 
@@ -50,10 +47,7 @@ public class QueryResolver implements GraphQLQueryResolver {
 
     //agency(id: Long!): Agency
     public Agency getAgency(Long id) {
-        Agency agency = agencyRepository.findOne(id);
-        if (agency == null) {
-            throw new AgencyNotFoundException(id);
-        }
-        return agency;
+        return agencyRepository.findById(id)
+                .orElseThrow(() -> new AgencyNotFoundException(id));
     }
 }

@@ -1,13 +1,16 @@
 package com.github.ravisankarchinnam.tours.graphql.schema;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
+import com.github.ravisankarchinnam.tours.enums.TourType;
 import com.github.ravisankarchinnam.tours.exception.AgencyNotFoundException;
 import com.github.ravisankarchinnam.tours.exception.TourNotFoundException;
+import com.github.ravisankarchinnam.tours.graphql.input.CreateTourInput;
+import com.github.ravisankarchinnam.tours.graphql.input.UpdateTourInput;
 import com.github.ravisankarchinnam.tours.model.Agency;
 import com.github.ravisankarchinnam.tours.model.Tour;
 import com.github.ravisankarchinnam.tours.repository.AgencyRepository;
 import com.github.ravisankarchinnam.tours.repository.TourRepository;
-import com.github.ravisankarchinnam.tours.enums.TourType;
+import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,11 +26,12 @@ public class MutationResolver implements GraphQLMutationResolver {
 
 
 
-    // createTour(name: String!, price: String!, duration: String, description: String, type: TourType!, agency: ID!) : Tour!
+    // createTour(input: CreateTourInput!) : Tour!
     @Transactional
-    public Tour createTour(String name, String price, String duration, String description, TourType tourType, Long agencyId) {
-        Agency agency = getAgencyById(agencyId);
-        return tourRepository.saveAndFlush(new Tour(null, name, price, duration, description, tourType, agency));
+    public Tour createTour(CreateTourInput tourInput) {
+        Agency agency = getAgencyById(tourInput.getAgency());
+        return tourRepository.saveAndFlush(new Tour(null, tourInput.getName(), tourInput.getPrice(),
+                tourInput.getDuration(), tourInput.getDescription(), tourInput.getType(), agency));
     }
 
 
@@ -53,24 +57,25 @@ public class MutationResolver implements GraphQLMutationResolver {
 
     // deleteTour(id: ID!) : Long!
     @Transactional
-    public boolean deleteTour(Long id) throws TourNotFoundException {
-        tourRepository.delete(id);
-        return true;
+    public boolean deleteTour(Long id) {
+        return tourRepository.deleteById(id)
+                .orElseThrow(() -> new TourNotFoundException(id));
+
     }
 
 
 
-    // updateTour(id: ID!, name: String!, price: String!, duration: String, description: String, type: TourType!, agency: ID!) : Tour!
+    // updateTour(input: UpdateTourInput!) : Tour!
     @Transactional
-    public Tour updateTour(Long id, String name, String price, String duration, String description, TourType type, Long agencyId) {
-        Agency agency = getAgencyById(agencyId);
-        Tour tour = tourRepository.findOne(id);
-        if (tour == null) {
-            throw new TourNotFoundException(id);
-        }
-        tour.setName(name);
-        tour.setPrice(price);
-        tour.setType(type);
+    public Tour updateTour(UpdateTourInput tourInput) {
+        Agency agency = getAgencyById(tourInput.getAgency());
+        final Long tourId = tourInput.getId();
+        Tour tour = getTour(tourId);
+        String name = tourInput.getName();
+        String price = tourInput.getPrice();
+        if (StringUtils.isNotEmpty(name)) tour.setName(name);
+        if (StringUtils.isNotEmpty(price)) tour.setPrice(price);
+        if (tourInput.getType() != null) tour.setType(tourInput.getType());
         tour.setAgency(agency);
 
         return tourRepository.save(tour);
@@ -79,11 +84,16 @@ public class MutationResolver implements GraphQLMutationResolver {
 
 
     @NotNull
+    private Tour getTour(Long pTourId) {
+        return tourRepository.findById(pTourId)
+                .orElseThrow(() -> new TourNotFoundException(pTourId));
+    }
+
+
+
+    @NotNull
     private Agency getAgencyById(Long agencyId) {
-        Agency agency = agencyRepository.findOne(agencyId);
-        if (agency == null) {
-            throw new AgencyNotFoundException(agencyId);
-        }
-        return agency;
+        return agencyRepository.findById(agencyId)
+                .orElseThrow(() -> new AgencyNotFoundException(agencyId));
     }
 }

@@ -16,10 +16,8 @@ public class TourResolver implements GraphQLResolver<Tour> {
 
 
     public Agency getAgency(Tour tour) {
-        Agency agency = agencyRepository.findOne(tour.getAgency().getId());
-        if (agency == null) {
-            throw new TourNotFoundException(tour.getAgency().getId());
-        }
-        return agency;
+        final Long tourId = tour.getAgency().getId();
+        return agencyRepository.findById(tourId)
+                .orElseThrow(() -> new TourNotFoundException(tourId));
     }
 }

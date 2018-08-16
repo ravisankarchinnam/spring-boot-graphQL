@@ -3,10 +3,15 @@ schema {
     mutation: Mutation
 }
 
-
 type Query {
     allTours: [Tour]
     tour(id: ID!): Tour
+}
+
+type Mutation {
+    createTour(input: CreateTourInput!) : Tour!
+    deleteTour(id: ID!) : Boolean!
+    updateTour(input: UpdateTourInput!) : Tour!
 }
 
 type Tour {
@@ -19,15 +24,28 @@ type Tour {
     agency: Agency!
 }
 
-type Mutation {
-    createTour(name: String!, price: String!, duration: String, description: String, type: TourType!, agency: ID!) : Tour!
-    deleteTour(id: ID!) : Boolean!
-    updateTour(id: ID!, name: String!, price: String!, duration: String, description: String, type: TourType!, agency: ID!) : Tour!
-}
-
 enum TourType {
     ECONOMY
     ADVENTURE
     COUPLE
     LUXURY
+}
+
+input CreateTourInput {
+    name: String!
+    price: String!
+    duration: String
+    description: String
+    type: TourType!
+    agency: ID!
+}
+
+input UpdateTourInput {
+    id: ID!
+    name: String!
+    price: String!
+    duration: String
+    description: String
+    type: TourType!
+    agency: ID!
 }

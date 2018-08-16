@@ -1,7 +1,7 @@
 package com.github.ravisankarchinnam.tours.web;
 
-import com.github.ravisankarchinnam.tours.dto.TourDTO;
-import com.github.ravisankarchinnam.tours.enums.TourType;
+import com.github.ravisankarchinnam.tours.graphql.input.CreateTourInput;
+import com.github.ravisankarchinnam.tours.graphql.input.UpdateTourInput;
 import com.github.ravisankarchinnam.tours.graphql.schema.MutationResolver;
 import com.github.ravisankarchinnam.tours.graphql.schema.QueryResolver;
 import com.github.ravisankarchinnam.tours.model.Tour;
@@ -39,8 +39,15 @@ public class TourResource {
 
     @PostMapping
     @ResponseBody
-    public Tour create(@RequestBody TourDTO tour) {
-        return mutation.createTour(tour.getName(), tour.getPrice(), tour.getDuration(),
-                tour.getDescription(), TourType.valueOf(tour.getType()), tour.getAgencyId());
+    public Tour create(@RequestBody CreateTourInput tourInput) {
+        return mutation.createTour(tourInput);
+    }
+
+
+
+    @PatchMapping
+    @ResponseBody
+    public Tour update(@RequestBody UpdateTourInput tourInput) {
+        return mutation.updateTour(tourInput);
     }
 }

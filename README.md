@@ -44,14 +44,14 @@ This Standalone Spring boot project demonstrates the crud operations on Tour ser
     ```
     GraphiQL Syntax:
         mutation {
-          createTour(name:"India", price:"34543.43",duration:"3", type:LUXURY,agency:1){
+          createTour(input: {name:"India", price:"34543.43",duration:"3", type:LUXURY,agency:1}){
             name
           }
         }
     
     JSON/postman syntax:
         {
-        	"query": "mutation createTour {createTour(name:'India', price:'34543.43',duration:'3', type:LUXURY,agency:1){name}}","variables":null,"operationName":"createTour"
+        "query": "mutation createTour($input: CreateTourInput!) {createTour(input: $input){name}}","variables":{"input": {"name":"India", "price":"34543.43","duration":"3", "type":"LUXURY","agency":1} },"operationName":"createTour"
         }
     ```
 ### To retrieve a single Tour:
@@ -85,7 +85,22 @@ This Standalone Spring boot project demonstrates the crud operations on Tour ser
         {
             "query": "mutation deleteTour {deleteTour(id:4)}","variables":null,"operationName":"deleteTour"
         }
-    ```    
+    ```   
+### To updateTour:
+    ```
+    GraphiQL Syntax:
+        mutation 
+        {
+          updateTour(input: {id: 4, name:"India", price:"986666.43",duration:"3", type:LUXURY,agency:1}){
+            name
+          }
+        }
+    
+    JSON/postman syntax:
+        {
+        "query": "mutation updateTour($input: UpdateTourInput!) {updateTour(input: $input){name}}","variables":{"input": {"id":4, "name":"India", "price":"908765.43","duration":"3", "type":"LUXURY","agency":1} },"operationName":"updateTour"
+        }
+    ``` 
 ## To retrieve allAgencies:
     ```
     GraphiQL Syntax:
